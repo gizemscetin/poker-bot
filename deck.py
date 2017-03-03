@@ -31,6 +31,26 @@ class Card:
 			s += "K"
 			
 		print(s, end = ' ')
+		
+	def __eq__(self, other):
+	# Override the default Equals behavior
+		if isinstance(other, self.__class__):
+			return self.rank_ == other.rank_
+		return False
+
+	def __ne__(self, other):
+		# Define a non-equality test
+		return not self.__eq__(other)
+
+	def __lt__(self, other):
+		# Define comparison w.r.t their ranks
+		if isinstance(other, self.__class__):
+			if self.rank_ == 1:
+				return False
+			if other.rank_ == 1:
+				return True
+			return self.rank_ < other.rank_
+		return False
 
 class Deck:
 	def __init__(self):
@@ -38,6 +58,7 @@ class Deck:
 		for suit in range(4):
 			for rank in range(1, 14):
 				self.cards_.append(Card(rank, suit))
+		self.shuffle()
 				
 	def show(self):
 		for card in self.cards_:
@@ -45,9 +66,12 @@ class Deck:
 			
 	def shuffle(self):
 		random.shuffle(self.cards_)
+		
+	def pop(self):
+		return self.cards_.pop(0)
 	
-			
-D = Deck()
-D.shuffle()
-D.show()
+
+# Test
+# D = Deck()
+# D.show()
 
