@@ -15,7 +15,7 @@ class Card:
 		elif self.suit_ == 2:
 			s += "\u2666"
 		elif self.suit_ == 3:
-			s += "♥"
+			s += "♥"	# (:
 		else:
 			s += "\u2660"
 			
