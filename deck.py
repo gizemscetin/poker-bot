@@ -11,13 +11,13 @@ class Card:
 	def show(self):
 		s = ""
 		if self.suit_ == 1:
-			s += "\033[107;30m\u2663\033[0m"
+			s += "\033[107;30m\u2663\033[0m" # Prints black on white symbol
 		elif self.suit_ == 2:
-			s += "\033[107;91m\u2666\033[0m"
+			s += "\033[107;91m\u2666\033[0m" # Prints red on white symbol
 		elif self.suit_ == 3:
-			s += "\033[107;91m♥\033[0m"	# (:
+			s += "\033[107;91m♥\033[0m"	# (: Prints red on white symbol
 		else:
-			s += "\033[107;30m\u2660\033[0m"
+			s += "\033[107;30m\u2660\033[0m" # Prints black on white symbol
 			
 		if self.rank_ == 1:
 			s += "A"
