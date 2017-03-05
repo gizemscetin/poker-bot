@@ -1,4 +1,16 @@
 import random
+import os
+
+# Defined colors
+term_black = ""
+term_red = ""
+term_def = ""
+
+# if a posix system like mac or linux print with colors
+if os.name == 'posix':
+	term_black = "\033[107;30m"
+	term_red = "\033[107;91m"
+	term_def = "\033[0m"
 
 # Attributes of a card object:
 # Rank : {1, 2, 3, ..., 10, 11(J), 12(Q), 13(K)}
@@ -11,13 +23,13 @@ class Card:
 	def show(self):
 		s = ""
 		if self.suit_ == 1:
-			s += "\033[107;30m\u2663\033[0m" # Prints black on white symbol
+			s += term_black + "\u2663" + term_def # Prints black on white symbol
 		elif self.suit_ == 2:
-			s += "\033[107;91m\u2666\033[0m" # Prints red on white symbol
+			s += term_red + "\u2666" + term_def # Prints red on white symbol
 		elif self.suit_ == 3:
-			s += "\033[107;91m♥\033[0m"	# (: Prints red on white symbol
+			s += term_red + "♥" + term_def 	# (: Prints red on white symbol
 		else:
-			s += "\033[107;30m\u2660\033[0m" # Prints black on white symbol
+			s += term_black + "\u2660" + term_def # Prints black on white symbol
 			
 		if self.rank_ == 1:
 			s += "A"
