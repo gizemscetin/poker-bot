@@ -20,7 +20,7 @@ class Card:
 		self.rank_ = rank
 		self.suit_ = suit
 		
-	def show(self):
+	def __str__(self):
 		s = ""
 		if self.suit_ == 1:
 			s += term_black + "\u2663" + term_def # Prints black on white symbol
@@ -42,12 +42,14 @@ class Card:
 		else:
 			s += "K"
 			
-		print(s, end = ' ')
+		return s
+		
+	__repr__ = __str__
 		
 	def __eq__(self, other):
 	# Override the default Equals behavior
 		if isinstance(other, self.__class__):
-			return self.rank_ == other.rank_
+			return (self.rank_ == other.rank_) and (self.suit_ == other.suit_)
 		return False
 
 	def __ne__(self, other):
@@ -70,20 +72,25 @@ class Deck:
 		for suit in range(4):
 			for rank in range(1, 14):
 				self.cards_.append(Card(rank, suit))
-		self.shuffle()
-				
-	def show(self):
-		for card in self.cards_:
-			card.show()
+			
+	def __str__(self):
+		return str(self.cards_)
 			
 	def shuffle(self):
 		random.shuffle(self.cards_)
 		
 	def pop(self):
 		return self.cards_.pop(0)
-	
+		
+	def remove(self, cards):
+		# Find the given cards and remove them from the deck.
+		for card in cards:
+			self.cards_.remove(card)
+				
 
 # Test
-# D = Deck()
-# D.show()
+#D = Deck()
+#print(D)
+#D.shuffle()
+#print(D)
 
