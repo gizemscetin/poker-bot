@@ -13,7 +13,7 @@ if os.name == 'posix':
 	term_def = "\033[0m"
 
 # Attributes of a card object:
-# Rank : {1, 2, 3, ..., 10, 11(J), 12(Q), 13(K)}
+# Rank : {2, 3, ..., 10, 11(J), 12(Q), 13(K), 14(A)}
 # Suit : Club(1), Diamond(2), Heart(3), Spade(4)
 class Card:
 	def __init__(self, rank, suit):
@@ -31,16 +31,16 @@ class Card:
 		else:
 			s += term_black + "\u2660" + term_def # Prints black on white symbol
 			
-		if self.rank_ == 1:
-			s += "A"
-		elif self.rank_ < 11:
+		if self.rank_ < 11:
 			s += str(self.rank_)
 		elif self.rank_ == 11:
 			s += "J"
 		elif self.rank_ == 12:
 			s += "Q"
-		else:
+		elif self.rank_ == 13:
 			s += "K"
+		else:
+			s += "A"
 			
 		return s
 		
@@ -59,10 +59,6 @@ class Card:
 	def __lt__(self, other):
 		# Define comparison w.r.t their ranks
 		if isinstance(other, self.__class__):
-			if self.rank_ == 1:
-				return False
-			if other.rank_ == 1:
-				return True
 			return self.rank_ < other.rank_
 		return False
 
@@ -70,8 +66,11 @@ class Deck:
 	def __init__(self):
 		self.cards_ = []
 		for suit in range(4):
-			for rank in range(1, 14):
+			for rank in range(2, 15):
 				self.cards_.append(Card(rank, suit))
+				
+	def __len__(self):
+		return len(self.cards_)
 			
 	def __str__(self):
 		return str(self.cards_)

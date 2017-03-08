@@ -12,9 +12,7 @@ class Dealer:
 		pockets = []
 		pockets.append(self.deck_.pop())
 		bisect.insort(pockets, self.deck_.pop())
-		
-		# Test Print
-		print(pockets)
+		return pockets
 			
 	def deal_flop(self):
 		# Flop (three community cards)
@@ -37,8 +35,7 @@ class Dealer:
 		return "\t\t" + str(self.communitycards_)
 		
 # Test Dealer
-D = Dealer()
-D.deal_pockets()
-D.deal_flop()
-D.deal_turn()
-D.deal_river()
+#D = Dealer()
+#D.deal_flop()
+#D.deal_turn()
+#D.deal_river()
