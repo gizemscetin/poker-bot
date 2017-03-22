@@ -31,16 +31,17 @@ class Card:
 		else:
 			s += term_black + "\u2660" + term_def # Prints black on white symbol
 			
-		if self.rank_ < 11:
+
+		if self.rank_ == 1:
+			s += "A"	
+		elif self.rank_ < 11:
 			s += str(self.rank_)
 		elif self.rank_ == 11:
 			s += "J"
 		elif self.rank_ == 12:
 			s += "Q"
 		elif self.rank_ == 13:
-			s += "K"
-		else:
-			s += "A"
+			s += "K"		
 			
 		return s
 		
@@ -59,6 +60,10 @@ class Card:
 	def __lt__(self, other):
 		# Define comparison w.r.t their ranks
 		if isinstance(other, self.__class__):
+			if self.rank_ == 1:
+				return False
+			if other.rank_ == 1:
+				return True
 			return self.rank_ < other.rank_
 		return False
 
@@ -66,7 +71,7 @@ class Deck:
 	def __init__(self):
 		self.cards_ = []
 		for suit in range(4):
-			for rank in range(2, 15):
+			for rank in range(1, 14):
 				self.cards_.append(Card(rank, suit))
 				
 	def __len__(self):
@@ -92,4 +97,3 @@ class Deck:
 #print(D)
 #D.shuffle()
 #print(D)
-
