@@ -1,6 +1,7 @@
 import math
 from player import Player, Action
 from dealer import Dealer
+from winner import ShowHands
 
 				
 # Action Set : {check-0, call-1, bet-2, raise-3, fold-4}
@@ -68,6 +69,10 @@ class Game:
 		self.players_[1].set_blind(1)	# Player 1 is always big blind
 		self.show_game_status()
 		
+		for player in self.players_:
+			player.set_cards(dealer.deal_pockets())
+			player.show_cards()
+		
 		if self.play_one_state(0): 	# pre-flop
 			dealer.deal_flop()
 			self.show_game_status()
@@ -81,7 +86,11 @@ class Game:
 		# Find the winner of the round
 		if not self.winner_ == None:
 			self.winner_.increase_stack(self.pot_)
-		#else: # User winner.py
+		else: # User winner.py
+			for player in self.players_:
+				player.show_cards()
+			ShowHands.Winner(self.players_[0].pocket_cards_, self.players_[1].pocket_cards_,
+							 dealer.communitycards_)
 			#self.winner_.increase_stack(self.pot_)
 		self.show_game_status()
 		

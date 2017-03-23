@@ -58,6 +58,12 @@ class Player:
 			self.stack_ -= 1
 		elif blind == 1:
 			self.stack_ -= 2
+			
+	def set_cards(self, cards):
+		self.pocket_cards_ = cards
+		
+	def show_cards(self):
+		print("Player " + str(self.id_) + " : " + str(self.pocket_cards_))
 		
 	def print_last_action(self):
 		s = "Player " + str(self.id_)
