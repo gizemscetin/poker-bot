@@ -44,6 +44,8 @@ class Game:
 			if player.decrease_stack(last_action):
 			# Update the current pot according to the action
 				self.pot_ += 1
+				if last_action.index_ == 3:
+					self.pot_ += 1
 			
 			# Handle 2 special cases here!!! 
 			# Call -> Check and Raise -> Bet
@@ -64,6 +66,7 @@ class Game:
 	def play_one_round(self):
 		dealer = Dealer()				# Create new dealer for every round
 		self.pot_ = 3					# Clear the pot by setting it to small + big blinds
+		self.winner_ = None
 		
 		self.players_[0].set_blind(0)	# Player 0 is always small blind
 		self.players_[1].set_blind(1)	# Player 1 is always big blind
@@ -89,22 +92,21 @@ class Game:
 		else: # User winner.py
 			for player in self.players_:
 				player.show_cards()
-			winner_id = ShowHands.Winner(self.players_[0].pocket_cards_, self.players_[1].pocket_cards_,
-																	 dealer.communitycards_)
+			winner_id = ShowHands.Winner(self.players_[0].pocket_cards_, self.players_[1].pocket_cards_, dealer.communitycards_)
+			#print("Debugging Test winner_id : " + str(winner_id))
 			if not winner_id == None:
 				for player in self.players_:
 					if player.check_id(winner_id+1):
+						player.increase_stack(self.pot_)
 						self.winner_ = player
 						break
-				self.winner_.increase_stack(self.pot_)
 			else: #Then it's a tie!!!
 				for player in self.players_:
 					player.increase_stack(self.pot_/2)
 					
-				self.winner_.increase_stack(self.pot_)
 		self.show_game_status()
 		
-		self.winner_ = None
+		
 		
 	def start(self):
 		game_end = False

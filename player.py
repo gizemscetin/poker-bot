@@ -95,9 +95,12 @@ class Player:
 		if self.stack_ <= 0:
 			return True
 			
-	def decrease_stack(self, action, amount = 1):
-		if action.index_ == 1 or action.index_ == 2 or action.index_ == 3:
-			self.stack_ -= amount
+	def decrease_stack(self, action):
+		if action.index_ == 1 or action.index_ == 2:
+			self.stack_ -= 1
+			return True
+		elif action.index_ == 3:
+			self.stack_ -= 2
 			return True
 		return False
 	
