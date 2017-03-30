@@ -89,10 +89,22 @@ class Game:
 		else: # User winner.py
 			for player in self.players_:
 				player.show_cards()
-			ShowHands.Winner(self.players_[0].pocket_cards_, self.players_[1].pocket_cards_,
-							 dealer.communitycards_)
-			#self.winner_.increase_stack(self.pot_)
+			winner_id = ShowHands.Winner(self.players_[0].pocket_cards_, self.players_[1].pocket_cards_,
+																	 dealer.communitycards_)
+			if not winner_id == None:
+				for player in self.players_:
+					if player.check_id(winner_id+1):
+						self.winner_ = player
+						break
+				self.winner_.increase_stack(self.pot_)
+			else: #Then it's a tie!!!
+				for player in self.players_:
+					player.increase_stack(self.pot_/2)
+					
+				self.winner_.increase_stack(self.pot_)
 		self.show_game_status()
+		
+		self.winner_ = None
 		
 	def start(self):
 		game_end = False

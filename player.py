@@ -144,6 +144,9 @@ class Player:
 				
 	def add_action_history(self, action):
 		self.action_history_.append(action)
+		
+	def check_id(self, id):
+		return (self.id_ == id)
 				
 			
 			
