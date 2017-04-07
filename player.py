@@ -63,7 +63,8 @@ class Player:
 		self.pocket_cards_ = cards
 		
 	def show_cards(self):
-		print("Player " + str(self.id_) + " : " + str(self.pocket_cards_))
+		#print("Player " + str(self.id_) + " : " + str(self.pocket_cards_))
+		print("\t"*2*(self.id_-1) + str(self.pocket_cards_))
 		
 	def print_last_action(self):
 		s = "Player " + str(self.id_)
